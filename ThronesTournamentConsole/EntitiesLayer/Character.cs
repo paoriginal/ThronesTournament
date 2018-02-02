@@ -17,11 +17,20 @@ namespace EntitiesLayer
         {
             this.relationships.Add(id, relationship);
         }
-        public Character( Statistics stats, string firstName, string lastName /*addRelatives*/)
+        public Character(Statistics stats, string firstName, string lastName /*addRelatives*/)
         {
             statistics = stats;
             this.firstName = firstName;
             this.lastName = lastName;
+            relationships = new Dictionary<int, Relationship>();
+        }
+        public Character(int id, Statistics stats, string firstName, string lastName /*addRelatives*/)
+        {
+            this.id = id;
+            statistics = stats;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            relationships = new Dictionary<int, Relationship>();
         }
         public override string ToString() { return null; }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using BusinessLayer;
 using DataAccessLayer;
+using EntitiesLayer;
 
 namespace ThronesTournamentConsole
 {
@@ -9,9 +10,12 @@ namespace ThronesTournamentConsole
         static void Main(string[] args)
         {
             BusinessManager bm = new BusinessManager();
-            //bm.createCharacter("Jon", "Snow", 3, 2, 1);
-            //bm.updateCharacters();
-            DalManager.getInstance().getCharacters();
+            DalManagerCharacter.getInstance().remove(0);
+            bm.createCharacter("Jon", "Snow", 30, 20, 10);
+            
+            bm.updateCharacters();
+            foreach (Character c in DalManagerCharacter.getInstance().getEntities())
+                Console.WriteLine(c.id + " " + c.firstName + " " + c.lastName + " " + c.statistics.hp + " " + c.statistics.bravoury + " " + c.statistics.crazyness);
             Console.ReadLine();
             /*
             while (true)

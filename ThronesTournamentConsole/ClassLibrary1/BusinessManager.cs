@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using EntitiesLayer;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLayer
@@ -28,12 +29,12 @@ namespace BusinessLayer
 
         public void updateCharacters()
         {
-            DalManager dm = DalManager.getInstance();
-            List<Character> dbCharac = dm.getCharacters();
-            foreach (Character c in characters)
+            DalManagerCharacter dm = DalManagerCharacter.getInstance();
+            List<int> dbCharac = dm.getIds();
+            for(int i=0; i < characters.Count; i++)
             {
-                if (dbCharac.Contains(c)) dm.updateCharacter(c);
-                else dm.insertCharacter(c);
+                if (dbCharac.Contains(characters[i].id)) dm.update(characters[i]);
+                else dm.insert(characters[i]);
             }
 
         }

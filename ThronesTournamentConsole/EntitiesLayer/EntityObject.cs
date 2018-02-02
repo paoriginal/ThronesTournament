@@ -3,13 +3,12 @@
     public abstract class EntityObject
     {
 
-        private int nbObjects=0;
+        private static int nbObjects=0;
         //auto-incrémentation
         public int id { get; set; }
 
-        public EntityObject ()
-        {
-            id = nbObjects++;
-        }
+        public EntityObject () {  id = nbObjects++; }
+
+        public static void resetNbObject() { nbObjects = 0; }
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DalManager.cs" />
+    <Compile Include="DalManagerCharacter.cs" />
     <Compile Include="DalSqlServer.cs" />
     <Compile Include="iDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

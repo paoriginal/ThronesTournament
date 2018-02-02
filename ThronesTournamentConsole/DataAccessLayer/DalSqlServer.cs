@@ -27,7 +27,7 @@ namespace DataAccessLayer
                         Object attr = null;
 
                         attr = sqlDataReader[sqlDataReader.GetName(i)];
-                        row += string.Format("{0}:{1} ", i, attr==null ? "" : attr.ToString());
+                        row += string.Format("{0},", attr==null ? "" : attr.ToString());
                     }
                     results.Add(row);
                 }
