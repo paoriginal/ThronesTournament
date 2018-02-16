@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DalManager.cs" />
+    <Compile Include="DalManagerTerritory.cs" />
+    <Compile Include="DalManagerWar.cs" />
+    <Compile Include="DalManagerFight.cs" />
+    <Compile Include="DalManagerHouse.cs" />
     <Compile Include="DalManagerCharacter.cs" />
     <Compile Include="DalSqlServer.cs" />
     <Compile Include="iDal.cs" />

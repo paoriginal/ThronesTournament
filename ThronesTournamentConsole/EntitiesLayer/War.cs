@@ -8,5 +8,7 @@ namespace EntitiesLayer
 {
     public class War : EntityObject
     {
+        public War() { }
+        public War(int id) { this.id = id; }
     }
 }

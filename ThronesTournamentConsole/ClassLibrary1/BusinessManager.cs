@@ -7,11 +7,14 @@ namespace BusinessLayer
 {
     public class BusinessManager
     {
-        List<Character> characters;
-        List<Fight> fights;
-        List<House> houses;
-        List<Territory> territories;
-        List<War> wars;
+        
+        public List<Character> characters { get; }
+        public List<Fight> fights { get; }
+        public List<House> houses { get; }
+        public List<Territory> territories { get; }
+        public List<War> wars { get; }
+
+
 
         public BusinessManager()
         {
@@ -31,6 +34,7 @@ namespace BusinessLayer
         {
             DalManagerCharacter dm = DalManagerCharacter.getInstance();
             List<int> dbCharac = dm.getIds();
+
             for(int i=0; i < characters.Count; i++)
             {
                 if (dbCharac.Contains(characters[i].id)) dm.update(characters[i]);
@@ -38,5 +42,26 @@ namespace BusinessLayer
             }
 
         }
+
+        public void createHouse(string name, int nbUnits)
+        {
+            houses.Add(new House(new List<int>(), name, nbUnits));
+        }
+
+        public void updateHouses ()
+        {
+            DalManagerHouse dm = DalManagerHouse.getInstance();
+            List<int> dbHouse = dm.getIds();
+
+            foreach (int n in dbHouse) Console.WriteLine("dbhouse.count   " +dbHouse.Count + "  id vaut " + n);
+
+            for (int i=0; i<houses.Count; i++)
+            {
+                if (dbHouse.Contains(houses[i].id)) { Console.WriteLine("2"); dm.update(houses[i]); }
+                else { Console.WriteLine("4"); dm.insert(houses[i]); }
+                }
+            Console.WriteLine("5");
+        }
+
     }
 }
