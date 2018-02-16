@@ -32,12 +32,32 @@ namespace EntitiesLayer
             this.lastName = lastName;
             relationships = new Dictionary<int, Relationship>();
         }
+
+        public double getValue()
+        {
+            return (statistics.bravoury * 7 - statistics.crazyness * 3) * (statistics.hp / statistics.hpMax);
+        }
+
         public override string ToString() { return null; }
+
+        public double getRelationValue(Character characD)
+        {
+            if (!relationships.Keys.Contains(characD.id)) return 50;
+            switch (relationships[characD.id])
+            {
+                case Relationship.LOVE       : return 0;
+                case Relationship.FRIENDSHIP : return 25;
+                case Relationship.RIVALRY    : return 75;
+                case Relationship.HATRED     : return 100;
+                default                      : return 50;
+            }
+        }
     }
 
     public class Statistics
     {
         public int hp { get; set; }
+        public int hpMax { get; set; }
         public int bravoury { get; set; }
         public int crazyness { get; set; }
 
@@ -46,10 +66,11 @@ namespace EntitiesLayer
         public Statistics(int hp, int bravoury, int crazyness)
         {
             this.hp = hp;
+            this.hpMax = hp;
             this.bravoury = bravoury;
             this.crazyness = crazyness;
         }
-}
+    }
 
     public enum Relationship { FRIENDSHIP, LOVE, HATRED, RIVALRY }
 

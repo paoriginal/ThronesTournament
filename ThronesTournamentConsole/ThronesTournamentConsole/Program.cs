@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer;
 using DataAccessLayer;
 using EntitiesLayer;
@@ -11,12 +12,33 @@ namespace ThronesTournamentConsole
         {
             BusinessManager bm = new BusinessManager();
             DalManagerCharacter.getInstance().remove(0);
+            DalManagerCharacter.getInstance().remove(1);
             bm.createCharacter("Jon", "Snow", 30, 20, 10);
-            
+            bm.createCharacter("Jon2", "Snow2", 30, 20, 10);
+
             bm.updateCharacters();
             foreach (Character c in DalManagerCharacter.getInstance().getEntities())
                 Console.WriteLine(c.id + " " + c.firstName + " " + c.lastName + " " + c.statistics.hp + " " + c.statistics.bravoury + " " + c.statistics.crazyness);
+
+
+
+
+            //
+            DalManagerHouse.getInstance().remove(2);
+            DalManagerHouse.getInstance().remove(3);
+
+            bm.createHouse("Stark", 100);
+            Console.WriteLine("count   " + bm.houses.Count + "   id " + bm.houses[0].id);
+            bm.updateHouses();
+            foreach (House h in DalManagerHouse.getInstance().getEntities())
+                Console.WriteLine(h.id + " " + h.name + " " + h.nbUnits);
             Console.ReadLine();
+
+
+
+
+
+
             /*
             while (true)
             {

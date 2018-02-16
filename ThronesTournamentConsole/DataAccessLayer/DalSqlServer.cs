@@ -4,9 +4,16 @@ using System.Data.SqlClient;
 
 namespace DataAccessLayer
 {
+
+    //remettre sans les publics
     class DalSqlServer : iDal
     {
-        string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\auchedotal\\Downloads\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30";
+        private static DalSqlServer INSTANCE = null;
+        private string _connectionString;
+
+        private DalSqlServer() { _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Aubin\\Documents\\ISIMA\\ZZ2\\SERVICES_WEB\\ThronesTournament\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30"; }
+
+        //string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Aubin\\Documents\\ISIMA\\ZZ2\\SERVICES_WEB\\ThronesTournament\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30";
 
         List<string> iDal.ExecSelectRequest(string request)
         {
@@ -49,6 +56,13 @@ namespace DataAccessLayer
 
                 sqlConnection.Close();
             }
+        }
+        public static DalSqlServer getInstance()
+        {
+            if (INSTANCE == null)
+                INSTANCE = new DalSqlServer();
+
+            return INSTANCE;
         }
     }
 }
