@@ -17,36 +17,34 @@ namespace DataAccessLayer
         {
             iDal dss = DalSqlServer.getInstance();
 
-            dss.ExecRequest("INSERT INTO Charac VALUES(" + ((Character)e).id + ", '" + ((Character)e).firstName + "', '" + ((Character)e).lastName + "', NULL);");
-            dss.ExecRequest("INSERT INTO Stats VALUES("  + ((Character)e).id + ", " + ((Character)e).statistics.hp + ", " + ((Character)e).statistics.bravoury + ", " + ((Character)e).statistics.crazyness + ");");
+            dss.ExecRequest("INSERT INTO Charac VALUES(" + e.id + ", '" + ((Character)e).firstName + "', '" + ((Character)e).lastName + "', NULL);");
+            dss.ExecRequest("INSERT INTO Stats VALUES("  + e.id + ", " + ((Character)e).statistics.hp + ", " + ((Character)e).statistics.bravoury + ", " + ((Character)e).statistics.crazyness + ");");
             foreach (KeyValuePair<int, Relationship> relation in ((Character)e).relationships)
-                dss.ExecRequest("INSERT INTO Relation VALUES(" + ((Character)e).id + ", " + relation.Key + ", " + relation.Value + ");");
+                dss.ExecRequest("INSERT INTO Relation VALUES(" + e.id + ", " + relation.Key + ", " + relation.Value + ");");
         }
 
         public override void update(EntityObject e)
         {
             iDal dss = DalSqlServer.getInstance();
 
-            dss.ExecRequest("UPDATE Charac SET firstName = " + ((Character)e).firstName            + " WHERE id = " + ((Character)e).id + ";");
-            dss.ExecRequest("UPDATE Charac SET lastName = "  + ((Character)e).lastName             + " WHERE id = " + ((Character)e).id + ";");
-            dss.ExecRequest("UPDATE Stats SET hp = "         + ((Character)e).statistics.hp        + " WHERE id = " + ((Character)e).id + ";");
-            dss.ExecRequest("UPDATE Stats SET bravoury = "   + ((Character)e).statistics.bravoury  + " WHERE id = " + ((Character)e).id + ";");
-            dss.ExecRequest("UPDATE Stats SET crazyness = "  + ((Character)e).statistics.crazyness + " WHERE id = " + ((Character)e).id + ";");
+            dss.ExecRequest("UPDATE Charac SET firstName = " + ((Character)e).firstName            + " WHERE id = " + e.id + ";");
+            dss.ExecRequest("UPDATE Charac SET lastName = "  + ((Character)e).lastName             + " WHERE id = " + e.id + ";");
+            dss.ExecRequest("UPDATE Stats SET hp = "         + ((Character)e).statistics.hp        + " WHERE id = " + e.id + ";");
+            dss.ExecRequest("UPDATE Stats SET bravoury = "   + ((Character)e).statistics.bravoury  + " WHERE id = " + e.id + ";");
+            dss.ExecRequest("UPDATE Stats SET crazyness = "  + ((Character)e).statistics.crazyness + " WHERE id = " + e.id + ";");
 
-            dss.ExecRequest("DELETE FROM Relation WHERE Id1 = " + ((Character)e).id + ";");
+            dss.ExecRequest("DELETE FROM Relation WHERE Id1 = " + e.id + ";");
             foreach (KeyValuePair<int, Relationship> relation in ((Character)e).relationships)
-                dss.ExecRequest("INSERT INTO Relation VALUES(" + ((Character)e).id + ", " + relation.Key + ", " + relation.Value + ");");
+                dss.ExecRequest("INSERT INTO Relation VALUES("  + e.id + ", " + relation.Key + ", " + relation.Value + ");");
 
         }
 
         public override List<int> getIds()
         {
             List<int> characters = new List<int>();
-            iDal dss = DalSqlServer.getInstance();
-            List<string> ids = dss.ExecSelectRequest("SELECT Id FROM Charac;");
             int charIntId;
 
-            foreach (string charId in ids)
+            foreach (string charId in ((iDal)DalSqlServer.getInstance()).ExecSelectRequest("SELECT Id FROM Charac;"))
             {
                 int.TryParse(charId, out charIntId);
                 characters.Add(charIntId);
@@ -64,7 +62,7 @@ namespace DataAccessLayer
             bool isNotNull = true;
             
             characList = dss.ExecSelectRequest("SELECT * FROM Charac WHERE Id = " + id + ";")[0].Split(',');
-            statsList = dss.ExecSelectRequest("SELECT * FROM Stats WHERE Id = " + id + ";")[0].Split(',');
+            statsList = dss.ExecSelectRequest("SELECT * FROM Stats WHERE Id = "   + id + ";")[0].Split(',');
             isNotNull = int.TryParse(statsList[1], out hp);
             if (isNotNull) isNotNull = int.TryParse(statsList[2], out bravoury);
             else bravoury = -1;
@@ -88,8 +86,8 @@ namespace DataAccessLayer
         {
             iDal dss = DalSqlServer.getInstance();
 
-            dss.ExecRequest("DELETE FROM Charac WHERE Id = " + id + ";");
-            dss.ExecRequest("DELETE FROM Stats WHERE Id = " + id + ";");
+            dss.ExecRequest("DELETE FROM Charac WHERE Id = "    + id + ";");
+            dss.ExecRequest("DELETE FROM Stats WHERE Id = "     + id + ";");
             dss.ExecRequest("DELETE FROM Relation WHERE Id1 = " + id + " OR Id2 = " + id + ";");
         }
 
