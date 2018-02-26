@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Page3";
+    Layout = null;
+}
+
+    <p id="dispo"></p>
+    <label for="attaque">Combien d'unité à l'attaque?</label>
+    <input id="attaque" name="attaque" type="number" min="0" max="" step="1" value="" />
+
+    <label for="defense">Combien d'unité en défense?</label>
+    <input id="defense" name="defense" type="number" min="0" max="" step="1" value="" />
+    <hr />
+    <div class="offset-4" style="display: inline-grid;">
+        <button style="margin-left: 38.195px;" value="Changement d'axe orbital de la Terre" id="etape3">Suivant</button>
+    </div>
+
+<script>
+    $('#main').on("change", ":input", function () {
+        var cb = $(this);
+        var id = cb.attr("id");
+        if (id == "attaque") {
+            $('#defense').attr('value', 2500 - $('#attaque').val());
+        }
+        if (id == "defense") {
+            $('#attaque').attr('value', 2500 - $('#defense').val());
+        }
+    })
+</script>
+

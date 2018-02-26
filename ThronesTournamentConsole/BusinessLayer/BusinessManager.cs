@@ -30,6 +30,30 @@ namespace BusinessLayer
             foreach (War       w in DalManagerWar      .getInstance().getEntities()) wars.Add(w);
         }
 
+
+        public void initiatDataBase ()
+        {
+            DalManagerCharacter DalCharac = DalManagerCharacter.getInstance();
+            DalManagerHouse DalHouse = DalManagerHouse.getInstance();
+
+            //DalHouse.insert(new House(new List<int>(), name, nbUnits))
+
+
+            //Stark
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow") );
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+
+
+            //new Character(new Statistics(hp, bravoury, crazyness), firstName, lastName)
+        }
+
+
         public void addPlayer(string name, int house) { players.Add(new Player(name, house)); }
         public void fight(int idHouseA, int idCharacA, int nbUnitsA, int idHouseD, int idCharacD /*plusieurs en def >? une liste ?*/, int nbUnitsD)
         {
@@ -79,6 +103,7 @@ namespace BusinessLayer
             if (INSTANCE == null) INSTANCE = new BusinessManager();
             return INSTANCE;
         }
+        
 
     }
 }
