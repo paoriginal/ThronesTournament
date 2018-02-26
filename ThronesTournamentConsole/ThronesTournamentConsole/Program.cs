@@ -10,6 +10,8 @@ namespace ThronesTournamentConsole
     {
         static void Main(string[] args)
         {
+            /*
+
             BusinessManager bm = new BusinessManager();
             DalManagerCharacter.getInstance().remove(0);
             DalManagerCharacter.getInstance().remove(1);
@@ -35,7 +37,7 @@ namespace ThronesTournamentConsole
             Console.ReadLine();
 
 
-
+            */
 
 
 

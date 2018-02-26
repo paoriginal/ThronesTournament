@@ -50,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\BusinessLayer.csproj">
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{cea68d63-b974-459e-8c70-021a0d2f051b}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
