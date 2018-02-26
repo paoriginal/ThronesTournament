@@ -23,8 +23,8 @@ namespace StubDataAccessLayer
         public List<Territory> getTerritories()
         {
             List<Territory> list = new List<Territory>();
-            list.Add(new Territory(TerritoryType.MOUNTAIN, new Character(null, "John", "Snow")));
-            list.Add(new Territory(TerritoryType.DESERT, new Character(null, "Daenerys", "Targaryen")));
+            list.Add(new Territory(TerritoryType.MOUNTAIN, 0));
+            list.Add(new Territory(TerritoryType.DESERT,0));
 
             return list;
         }

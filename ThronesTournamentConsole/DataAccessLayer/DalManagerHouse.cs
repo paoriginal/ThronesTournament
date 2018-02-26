@@ -17,11 +17,10 @@ namespace DataAccessLayer
         {
             iDal dss = DalSqlServer.getInstance();
 
-            dss.ExecRequest("INSERT INTO House VALUES(" + ((House)e).id + ", '" + ((House)e).name + "', " + ((House)e).nbUnits + ");");
+            dss.ExecRequest("INSERT INTO House VALUES(" + e.id + ", '" + ((House)e).name + "', " + ((House)e).nbUnits + ");");
 
             foreach (int id in ((House)e).housers)
-                dss.ExecRequest("UPDATE Charac SET idHouse = " + ((House)e).id + " WHERE id = " + id + ";");    //que se passe-t-il si le personnage n'existe pas dans la table ?
-            //on suppose que les persos sont déjà sets ?
+                dss.ExecRequest("UPDATE Charac SET idHouse = " + e.id + " WHERE id = " + id + ";");
 
         }
 
@@ -29,8 +28,8 @@ namespace DataAccessLayer
         {
             iDal dss = DalSqlServer.getInstance();
 
-            dss.ExecRequest("UPDATE House SET name = " + ((House)e).name            + " WHERE id = " + ((House)e).id + ";");
-            dss.ExecRequest("UPDATE House SET nbUnits = "  + ((House)e).nbUnits             + " WHERE id = " + ((House)e).id + ";");
+            dss.ExecRequest("UPDATE House SET name = "     + ((House)e).name               + " WHERE id = " + e.id + ";");
+            dss.ExecRequest("UPDATE House SET nbUnits = "  + ((House)e).nbUnits            + " WHERE id = " + e.id + ";");
         }
 
         public override List<int> getIds()
@@ -56,23 +55,13 @@ namespace DataAccessLayer
             string[] houseList;
             List<String> houserList, temp;
             int nbUnits, idHouser;
-            bool isNotNull = true;
-
-
             
             temp = dss.ExecSelectRequest("SELECT * FROM House;");
 
-            Console.WriteLine("temp     " + temp[0]+ "   id  " + id);
-
             houseList = dss.ExecSelectRequest("SELECT * FROM House WHERE Id = " + id + ";")[0].Split(',');
-
-            Console.WriteLine("house" + houseList);
-
             houserList = dss.ExecSelectRequest("SELECT * FROM Charac WHERE idHouse = " + id + ";");
-            isNotNull = int.TryParse(houseList[2], out nbUnits);
-            if (!isNotNull) nbUnits = -1;
-
-
+            if (!int.TryParse(houseList[2], out nbUnits)) nbUnits = -1;
+            
             house = new House(new List<int>(), houseList[1], nbUnits);
 
             foreach (string houser in houserList)
@@ -89,7 +78,6 @@ namespace DataAccessLayer
             iDal dss = DalSqlServer.getInstance();
 
             dss.ExecRequest("DELETE FROM House WHERE Id = " + id + ";");
-            //supprimer les affiliations ?
         }
 
         public static DalManagerHouse getInstance ()

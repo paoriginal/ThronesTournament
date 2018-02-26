@@ -8,7 +8,7 @@ namespace EntitiesLayer
 {
     public class House : EntityObject
     {
-        public List<int> housers { get; set; }    //faire une fonction pour get tous les persos dans businessmanager
+        public List<int> housers { get; set; }
         public string name { get; set; }
         public int nbUnits { get; set; }
 
