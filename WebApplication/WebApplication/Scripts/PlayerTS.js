@@ -364,6 +364,28 @@ $(function () {
                 //MAJ Player si house morte
                 //flush CombatTS.listCombat
                 //execution du code ci dessous
+                var jsonString = JSON.stringify(CombatTS.listCombat);
+                $.ajax({
+                    type: "GET",
+                    url: "/Combat",
+                    data: { jsonString: jsonString },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    //GET RESULT
+                    success: function (success) {
+                        //let list: CombatTS[] = success as CombatTS[];
+                        //$.each(success, function (index, element) {
+                        //    let character: CombatTS = new CombatTS(element.IdHouseAttack, element.IdHouseDefense, element.NbUniteAttack, element.NbUniteDefense);
+                        //    list.push(character);
+                        //});
+                        //list.forEach(function (element: CombatTS) {
+                        //    $('#div_list_character_ts').append(element.afficherCombat);
+                        //});
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                });
                 supprHandler5();
                 $('#main').empty();
                 $('#main').load("/Home/Page2", function (response, status, xhr) {
