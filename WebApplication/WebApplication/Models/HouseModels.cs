@@ -5,12 +5,12 @@ using System.Web;
 
 namespace WebApplication.Models
 {
-    public enum Type {Soin, Attaquant, Defenseur}
+    public enum Type { Soin, Attaquant, Defenseur }
 
     public class HouseModels
     {
         private int idHouse;
-            
+
         public int IdHouse
         {
             get { return idHouse; }
@@ -41,9 +41,24 @@ namespace WebApplication.Models
             set { listCharacters = value; }
         }
 
+        private List<int> listCharacterId;
 
+        public List<int> ListCharacterId
+        {
+            get { return listCharacterId; }
+            set { listCharacterId = value; }
+        }
 
+        public HouseModels(int id, string name, List<int> charId)
+        {
+            this.idHouse = id;
+            this.nomHouse = name;
+            this.ListCharacterId = charId;
+        }
 
-
+        public void AddCharacter(CharacterModels character)
+        {
+            this.listCharacters.Add(character);
+        }
     }
 }

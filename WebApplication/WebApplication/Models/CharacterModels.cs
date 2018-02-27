@@ -34,5 +34,12 @@
             set { profil = value; }
         }
 
+        public CharacterModels(int id, string firstName, string lastName)
+        {
+            this.idCharacter = id;
+            this.nom = lastName;
+            this.prenom = firstName;
+        }
+
     }
 }
