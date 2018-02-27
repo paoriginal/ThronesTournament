@@ -11,14 +11,15 @@ namespace ThronesTournamentConsole
         static void Main(string[] args)
         {
 
-            string example1 = @"{""name"":""John Doe"",""age"":20}";
 
-            string exemple2 = @"{""fruits"": [{ ""kiwis"": 3,""mangues"": 4,""pommes"": null},{ ""panier"": true }],""legumes"": {""patates"": ""amandine"",""poireaux"": false},""viandes"": [""poisson"",""poulet"",""boeuf""]}";
+            Console.WriteLine("ThronesTournamentConsole");
 
+            BusinessManager bm = BusinessManager.getInstance();
 
+            //bm.initiatDataBase();
 
+            Console.WriteLine("ThronesTournamentConsole");
 
-            Console.WriteLine("ThronesTournamentConsole");  
             Console.ReadLine();
             /*
 
