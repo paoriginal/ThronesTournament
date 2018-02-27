@@ -52,19 +52,32 @@ namespace API.Controllers
         public void  getDataFromClient (string jsonString)
         {
             BusinessManager bm = BusinessManager.getInstance();
+            List<int> idHouses = new List<int>();
             var json = new JavaScriptSerializer().Deserialize<jsonGlobalObject>(jsonString);  //parse la string pour construire un object jsonObject
 
             foreach(jsonObject j in json.listObject)
             {
                 bm.fight(j.IdHouseAttack, j.IdHeroAttack, j.NbUniteAttack, j.IdHouseDefense, j.listIdHeroDefense[0], j.NbUniteDefense);
                 
-                //foreach(int id in )
+                foreach(int id in j.listIdHeroSoins)
+                {
+                    bm.regenCharac(id);
+                }
             }
-                
-            //METTRE a jour les objets non dto du business manager en faisant la simu  -> méthode update dans BusinessManager + appel de fight
 
+            foreach(jsonObject j in json.listObject)
+            {
+                if (!idHouses.Contains(j.IdHouseAttack))
+                    idHouses.Add(j.IdHouseAttack);
 
-            //remettre à jour les objets dto dans les autres méthodes
+                if (!idHouses.Contains(j.IdHouseDefense))
+                    idHouses.Add(j.IdHouseDefense);
+            }
+
+            foreach(int id in idHouses)
+            {
+                bm.regenUnits(id);
+            }
 
         }
 
