@@ -18,17 +18,20 @@ namespace API.Controllers
 
         class jsonObject
         {
-            List<int> listIdHeroDefense;
-            List<int> listIdHeroSoins;
-            int IdHouseAttack;
-            int IdHouseDefense;
-            int NbUniteAtack;
-            int IdHeroAttack;
-            int NbUniteDefense;
+            public List<int> listIdHeroDefense { get; set; }
+            public List<int> listIdHeroSoins { get; set; }
+            public int IdHouseAttack { get; set; }
+            public int IdHouseDefense { get; set; }
+            public int NbUniteAttack { get; set; }
+            public int IdHeroAttack { get; set; }
+            public int NbUniteDefense { get; set; }
 
         }
 
-    
+        class jsonGlobalObject
+        {
+            public List<jsonObject> listObject { get; set; }
+        }
 
         public List<FightDTO> getEntities()
         {
@@ -48,11 +51,16 @@ namespace API.Controllers
 
         public void  getDataFromClient (string jsonString)
         {
+            BusinessManager bm = BusinessManager.getInstance();
+            var json = new JavaScriptSerializer().Deserialize<jsonGlobalObject>(jsonString);  //parse la string pour construire un object jsonObject
 
-            var jsonObject = new JavaScriptSerializer().Deserialize<jsonObject>(jsonString);  //parse la string pour construire un object jsonObject
-
-
-
+            foreach(jsonObject j in json.listObject)
+            {
+                bm.fight(j.IdHouseAttack, j.IdHeroAttack, j.NbUniteAttack, j.IdHouseDefense, j.listIdHeroDefense[0], j.NbUniteDefense);
+                
+                //foreach(int id in )
+            }
+                
             //METTRE a jour les objets non dto du business manager en faisant la simu  -> méthode update dans BusinessManager + appel de fight
 
 
