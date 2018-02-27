@@ -13,7 +13,6 @@ namespace BusinessLayer
         public List<House> houses { get; }
         public List<Territory> territories { get; }
         public List<War> wars { get; }
-        public List<Player> players { get; }
 
         public BusinessManager()
         {
@@ -53,37 +52,43 @@ namespace BusinessLayer
             //new Character(new Statistics(hp, bravoury, crazyness), firstName, lastName)
         }
 
-
-        public void addPlayer(string name, int house) { players.Add(new Player(name, house)); }
-        public void fight(int idHouseA, int idCharacA, int nbUnitsA, int idHouseD, int idCharacD /*plusieurs en def >? une liste ?*/, int nbUnitsD)
+        public void fight(int idHouseA, int idCharacA, int nbUnitsA, int idHouseD, int idCharacD, int nbUnitsD)
         {
             Territory field = getInstance().territories[new Random().Next(1, 5)];
-            House attacker = getHouse(idHouseA),
-                  defender = getHouse(idHouseD);
             Character characA = getCharac(idCharacA),
                       characD = getCharac(idCharacD);
-            int nbDeadA = 0,
-                nbDeadD = 0;
+            int nbDamages;
             
-            double attackerValue = characA.getValue() * 0.6 + characA.getRelationValue(characD) * 0.25 + (field.owner == attacker.id ? 15 : 0);
-            double defenderValue = characD.getValue() * 0.6 + characD.getRelationValue(characA) * 0.25 + (field.owner == defender.id ? 15 : 0);
+            double attackerValue = ((characA != null) ? characA.getValue() * 0.6 + characA.getRelationValue(characD) * 0.25 : 0) + (field.owner == getHouse(idHouseA).id ? 15 : 0);
+            double defenderValue = ((characD != null) ? characD.getValue() * 0.6 + characD.getRelationValue(characA) * 0.25 : 0) + (field.owner == getHouse(idHouseD).id ? 15 : 0);
 
-            while (nbDeadA < nbUnitsA && nbDeadD < nbUnitsD)
-            {
-                nbDeadD += (int)Math.Round(attackerValue * 0.1);
-                nbDeadA += (int)Math.Round(defenderValue * 0.1);
-                characD.statistics.hp -= (int)Math.Round(attackerValue * 0.1);
-                characA.statistics.hp -= (int)Math.Round(defenderValue * 0.1);
-            }
+            for (nbDamages = 0; nbDamages < nbUnitsA + characA.statistics.hp && nbDamages < nbUnitsD + characD.statistics.hp; nbDamages += (int)Math.Round(attackerValue * 0.1));
+
+            getHouse(idHouseA).nbUnits -= Math.Min(nbDamages, nbUnitsA);
+            getHouse(idHouseD).nbUnits -= Math.Min(nbDamages, nbUnitsD);
 
             foreach (Character c in characters)
             {
-                if (c.id == characA.id) c.statistics.hp = characA.statistics.hp;
-                else if (c.id == characD.id) c.statistics.hp = characD.statistics.hp;
+                if      (c.id == characA.id) c.statistics.hp -= Math.Max(nbDamages - nbUnitsA, 0);
+                else if (c.id == characD.id) c.statistics.hp -= Math.Max(nbDamages - nbUnitsD, 0);
             }
+        }
 
-            attacker.nbUnits -= Math.Min(nbDeadA, nbUnitsA);
-            defender.nbUnits -= Math.Min(nbDeadD, nbUnitsD);
+        public void regenCharac(int idCharac)
+        {
+            getCharac(idCharac).statistics.hp += Math.Min(Math.Max((getCharac(idCharac).statistics.hpMax - getCharac(idCharac).statistics.hp) / 2, 10),
+                                                                    getCharac(idCharac).statistics.hpMax - getCharac(idCharac).statistics.hp);
+        }
+
+        public void regenUnits(int idHouse)
+        {
+           getHouse(idHouse).nbUnits += Math.Min(Math.Max((100 - getHouse(idHouse).nbUnits) / 2, 10), 100 - getHouse(idHouse).nbUnits);
+        }
+
+        public bool hasLost(int idHouse)
+        {
+            foreach (int c in getHouse(idHouse).housers) if (getCharac(c).statistics.hp > 0) return false;
+            return true;
         }
 
         public House getHouse(int id)
