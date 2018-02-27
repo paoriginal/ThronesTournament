@@ -32,34 +32,40 @@ namespace BusinessLayer
 
         public void initiatDataBase ()
         {
-            DalManagerCharacter DalCharac = DalManagerCharacter.getInstance();
-            DalManagerHouse DalHouse = DalManagerHouse.getInstance();
+            DalManagerCharacter dalCharac = DalManagerCharacter.getInstance();
+            DalManagerHouse     dalHouse  = DalManagerHouse.getInstance();
+
+            DalManagerCharacter.getInstance().empty();
+            DalManagerFight    .getInstance().empty();
+            DalManagerHouse    .getInstance().empty();
+            DalManagerTerritory.getInstance().empty();
+            DalManagerWar      .getInstance().empty();
 
             //Stark
-            DalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
-            DalCharac.insert(new Character(2, new Statistics(30, 30, 10), "Arya", "Stark"));
-            DalCharac.insert(new Character(3, new Statistics(15, 20, 15), "Bran", "Stark"));
+            dalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            dalCharac.insert(new Character(2, new Statistics(30, 30, 10), "Arya", "Stark"));
+            dalCharac.insert(new Character(3, new Statistics(15, 20, 15), "Bran", "Stark"));
 
-            //targaryen
-            DalCharac.insert(new Character(4, new Statistics(30, 30, 5), "Daenerys", "Targaryen"));
-            DalCharac.insert(new Character(5, new Statistics(50, 30, 5), "Ver", "Gris"));
-            DalCharac.insert(new Character(6, new Statistics(50, 30, 5), "Jon", "Snow"));
+            //Targaryen
+            dalCharac.insert(new Character(4, new Statistics(30, 30, 5), "Daenerys", "Targaryen"));
+            dalCharac.insert(new Character(5, new Statistics(50, 30, 5), "Ver", "Gris"));
+            dalCharac.insert(new Character(6, new Statistics(50, 30, 5), "Jon", "Snow"));
 
             //Lannister
-            DalCharac.insert(new Character(7, new Statistics(50, 30, 5), "Jamie", "Lannister"));
-            DalCharac.insert(new Character(8, new Statistics(30, 15, 25), "Cersei", "Lannister"));
-            DalCharac.insert(new Character(9, new Statistics(70, 30, 30), "Gregor", "Clegane"));
+            dalCharac.insert(new Character(7, new Statistics(50, 30, 5), "Jamie", "Lannister"));
+            dalCharac.insert(new Character(8, new Statistics(30, 15, 25), "Cersei", "Lannister"));
+            dalCharac.insert(new Character(9, new Statistics(70, 30, 30), "Gregor", "Clegane"));
 
             //Greyjoy
-            DalCharac.insert(new Character(10, new Statistics(30, 5, 5), "Theon", "Greyjoy"));
-            DalCharac.insert(new Character(11, new Statistics(40, 30, 5), "Yara", "Greyjoy"));
-            DalCharac.insert(new Character(12, new Statistics(30, 15, 25), "Euron", "Greyjoy"));
+            dalCharac.insert(new Character(10, new Statistics(30, 5, 5), "Theon", "Greyjoy"));
+            dalCharac.insert(new Character(11, new Statistics(40, 30, 5), "Yara", "Greyjoy"));
+            dalCharac.insert(new Character(12, new Statistics(30, 15, 25), "Euron", "Greyjoy"));
 
             //DalHouse.insert(new House(new List<int>(), name, nbUnits))
-            DalHouse.insert(new House(13, new List<int> { 1, 2, 3 }, "Stark", 30000));
-            DalHouse.insert(new House(14, new List<int> { 4, 5, 6 }, "Targaryen", 100000));
-            DalHouse.insert(new House(15, new List<int> { 7, 8, 9 }, "Lannister", 80000));
-            DalHouse.insert(new House(16, new List<int> { 10, 11, 12 }, "Greyjoy", 30000));
+            dalHouse.insert(new House(13, new List<int> { 1, 2, 3 }, "Stark", 30000));
+            dalHouse.insert(new House(14, new List<int> { 4, 5, 6 }, "Targaryen", 100000));
+            dalHouse.insert(new House(15, new List<int> { 7, 8, 9 }, "Lannister", 80000));
+            dalHouse.insert(new House(16, new List<int> { 10, 11, 12 }, "Greyjoy", 30000));
         }
 
         public void fight(int idHouseA, int idCharacA, int nbUnitsA, int idHouseD, int idCharacD, int nbUnitsD)
