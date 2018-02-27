@@ -11,8 +11,10 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/territory")]
     public class TerritoryController : ApiController
     {
+        [Route("{getEntities}")]
         public List<TerritoryDTO> getEntities()
         {
             List<TerritoryDTO> territories = new List<TerritoryDTO>();

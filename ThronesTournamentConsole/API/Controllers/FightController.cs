@@ -11,8 +11,10 @@ using System.Web.Http;
 using System.Web.Script;
 using System.Web.Script.Serialization;
 
+
 namespace API.Controllers
 {
+    [RoutePrefix("api/fight")]
     public class FightController : ApiController
     {
 
@@ -43,12 +45,14 @@ namespace API.Controllers
             return fights;
         }
 
+        
         public FightDTO getEntity(int id)
         {
             return new FightDTO((Fight)DalManagerFight.getInstance().getEntity(id));
         }
-        
 
+
+        [Route("{getDataFromClient}")]
         public void  getDataFromClient (string jsonString)
         {
             BusinessManager bm = BusinessManager.getInstance();

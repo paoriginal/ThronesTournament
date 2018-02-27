@@ -11,8 +11,10 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/house")]
     public class HouseController : ApiController
     {
+        [Route("{getEntities}")]
         public List<HouseDTO> getEntities()
         {
             List<HouseDTO> houses = new List<HouseDTO>();
@@ -23,6 +25,7 @@ namespace API.Controllers
             return houses;
         }
 
+        [Route("{getEntity}")]
         public HouseDTO getEntity(int id)
         {
             return new HouseDTO((House)BusinessManager.getInstance().getHouse(id));

@@ -11,8 +11,10 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/war")]
     public class WarController : ApiController
     {
+        [Route("{getEntities}")]
         public List<WarDTO> getEntities()
         {
             List<WarDTO> wars = new List<WarDTO>();

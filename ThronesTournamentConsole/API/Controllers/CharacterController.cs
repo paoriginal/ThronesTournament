@@ -11,8 +11,10 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/character")]
     public class CharacterController : ApiController
     {
+        [Route("{getEntities}")]
         public List<CharacterDTO> getEntities()
         {
             List<CharacterDTO> characters = new List<CharacterDTO>();
@@ -23,6 +25,7 @@ namespace API.Controllers
             return characters;
         }
 
+        [Route("{getEntity}")]
         public CharacterDTO getEntity(int id)
         {
             return new CharacterDTO((Character)BusinessManager.getInstance().getCharac(id));
