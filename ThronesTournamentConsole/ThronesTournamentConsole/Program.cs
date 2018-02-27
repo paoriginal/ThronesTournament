@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BusinessLayer;
 using DataAccessLayer;
@@ -15,11 +15,11 @@ namespace ThronesTournamentConsole
 
             string exemple2 = @"{""fruits"": [{ ""kiwis"": 3,""mangues"": 4,""pommes"": null},{ ""panier"": true }],""legumes"": {""patates"": ""amandine"",""poireaux"": false},""viandes"": [""poisson"",""poulet"",""boeuf""]}";
 
-
-
+            initiateDataBase();
 
             Console.WriteLine("ThronesTournamentConsole");  
             Console.ReadLine();
+
             /*
 
             BusinessManager bm = new BusinessManager();
@@ -67,6 +67,44 @@ namespace ThronesTournamentConsole
                     default: return;
                 }
             }*/
+        }
+
+        public static void initiateDataBase()
+        {
+            DalManagerCharacter dalCharac = DalManagerCharacter.getInstance();
+            DalManagerHouse dalHouse = DalManagerHouse.getInstance();
+
+            DalManagerCharacter.getInstance().empty();
+            DalManagerFight.getInstance().empty();
+            DalManagerHouse.getInstance().empty();
+            DalManagerTerritory.getInstance().empty();
+            DalManagerWar.getInstance().empty();
+
+            //Stark
+            dalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
+            dalCharac.insert(new Character(2, new Statistics(30, 30, 10), "Arya", "Stark"));
+            dalCharac.insert(new Character(3, new Statistics(15, 20, 15), "Bran", "Stark"));
+
+            //Targaryen
+            dalCharac.insert(new Character(4, new Statistics(30, 30, 5), "Daenerys", "Targaryen"));
+            dalCharac.insert(new Character(5, new Statistics(50, 30, 5), "Ver", "Gris"));
+            dalCharac.insert(new Character(6, new Statistics(50, 30, 5), "Jon", "Snow"));
+
+            //Lannister
+            dalCharac.insert(new Character(7, new Statistics(50, 30, 5), "Jamie", "Lannister"));
+            dalCharac.insert(new Character(8, new Statistics(30, 15, 25), "Cersei", "Lannister"));
+            dalCharac.insert(new Character(9, new Statistics(70, 30, 30), "Gregor", "Clegane"));
+
+            //Greyjoy
+            dalCharac.insert(new Character(10, new Statistics(30, 5, 5), "Theon", "Greyjoy"));
+            dalCharac.insert(new Character(11, new Statistics(40, 30, 5), "Yara", "Greyjoy"));
+            dalCharac.insert(new Character(12, new Statistics(30, 15, 25), "Euron", "Greyjoy"));
+
+            //DalHouse.insert(new House(new List<int>(), name, nbUnits))
+            dalHouse.insert(new House(13, new List<int> { 1, 2, 3 }, "Stark", 30000));
+            dalHouse.insert(new House(14, new List<int> { 4, 5, 6 }, "Targaryen", 100000));
+            dalHouse.insert(new House(15, new List<int> { 7, 8, 9 }, "Lannister", 80000));
+            dalHouse.insert(new House(16, new List<int> { 10, 11, 12 }, "Greyjoy", 30000));
         }
     }
 }
