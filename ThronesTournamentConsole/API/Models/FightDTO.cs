@@ -6,11 +6,11 @@ namespace API.Models
     {
         public int id { get; set; }
 
-        public House challenger1 { get; set; }
+        public int challenger1 { get; set; }
 
-        public House challenger2 { get; set; }
+        public int challenger2 { get; set; }
 
-        public House winningHouse { get; set; }
+        public int winningHouse { get; set; }
 
         public FightDTO() { }
 

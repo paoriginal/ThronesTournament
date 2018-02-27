@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using DataAccessLayer;
 using EntitiesLayer;
+using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +17,17 @@ namespace API.Controllers
         {
             List<WarDTO> wars = new List<WarDTO>();
 
-            foreach (War w in DalManagerWar.getInstance().getEntities())
+            foreach (War w in BusinessManager.getInstance().wars)
                 wars.Add(new WarDTO(w));
 
             return wars;
         }
 
+        /*
         public WarDTO getEntity(int id)
         {
             return new WarDTO((War)DalManagerWar.getInstance().getEntity(id));
         }
-        
-        public void insert(WarDTO c)
-        {
-            DalManagerWar.getInstance().insert(new War(w.id));
-        }
+        */
     }
 }

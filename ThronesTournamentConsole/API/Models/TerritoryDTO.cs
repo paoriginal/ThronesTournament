@@ -8,7 +8,7 @@ namespace API.Models
 
         public TerritoryType territoryType { get; set; }
 
-        public Character owner { get; set; }
+        public int owner { get; set; }
 
         public TerritoryDTO() { }
 

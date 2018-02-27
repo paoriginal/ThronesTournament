@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{CEA68D63-B974-459E-8C70-021A0D2F051B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{028F3A9F-6475-4190-AE51-4AFD40F1DC60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CEA68D63-B974-459E-8C70-021A0D2F051B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEA68D63-B974-459E-8C70-021A0D2F051B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEA68D63-B974-459E-8C70-021A0D2F051B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028F3A9F-6475-4190-AE51-4AFD40F1DC60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028F3A9F-6475-4190-AE51-4AFD40F1DC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028F3A9F-6475-4190-AE51-4AFD40F1DC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028F3A9F-6475-4190-AE51-4AFD40F1DC60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

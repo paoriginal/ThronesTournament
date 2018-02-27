@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using DataAccessLayer;
 using EntitiesLayer;
+using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace API.Controllers
         {
             List<HouseDTO> houses = new List<HouseDTO>();
 
-            foreach (House h in DalManagerHouse.getInstance().getEntities())
+            foreach (House h in BusinessManager.getInstance().houses)
                 houses.Add(new HouseDTO(h));
 
             return houses;
@@ -24,12 +25,8 @@ namespace API.Controllers
 
         public HouseDTO getEntity(int id)
         {
-            return new HouseDTO((House)DalManagerHouse.getInstance().getEntity(id));
+            return new HouseDTO((House)BusinessManager.getInstance().getHouse(id));
         }
         
-        public void insert(HouseDTO h)
-        {
-            DalManagerHouse.getInstance().insert(new House(h.id, h.housers, h.name, h.nbUnits));
-        }
     }
 }

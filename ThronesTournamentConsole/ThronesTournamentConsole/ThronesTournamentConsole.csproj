@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API\API.csproj">
+      <Project>{028f3a9f-6475-4190-ae51-4afd40f1dc60}</Project>
+      <Name>API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{cea68d63-b974-459e-8c70-021a0d2f051b}</Project>
       <Name>BusinessLayer</Name>

@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using DataAccessLayer;
 using EntitiesLayer;
+using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace API.Controllers
         {
             List<CharacterDTO> characters = new List<CharacterDTO>();
 
-            foreach (Character c in DalManagerCharacter.getInstance().getEntities())
+            foreach (Character c in BusinessManager.getInstance().characters)
                 characters.Add(new CharacterDTO(c));
 
             return characters;
@@ -24,12 +25,15 @@ namespace API.Controllers
 
         public CharacterDTO getEntity(int id)
         {
-            return new CharacterDTO((Character)DalManagerCharacter.getInstance().getEntity(id));
+            return new CharacterDTO((Character)BusinessManager.getInstance().getCharac(id));
         }
-        
-        public void insert(CharacterDTO c)
+
+        /*
+        public void putEntity(string jsonString)
         {
-            DalManagerCharacter.getInstance().insert(new Character(c.id, c.stats, c.firstName, c.lastName));
-        }
+            //foreach characterDTO
+            BusinessManager.getInstance.
+        }*/
+        
     }
 }

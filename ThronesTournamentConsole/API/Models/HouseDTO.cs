@@ -7,7 +7,7 @@ namespace API.Models
     {
         public int id { get; set; }
 
-        public List<Character> housers { get; set; }
+        public List<int> housers { get; set; }
         public string name { get; set; }
         public int nbUnits { get; set; }
 
@@ -15,7 +15,7 @@ namespace API.Models
 
         public HouseDTO(House h)
         {
-            id = f.id;
+            id = h.id;
             housers = h.housers;
             name = h.name;
             nbUnits = h.nbUnits;

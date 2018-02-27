@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using DataAccessLayer;
 using EntitiesLayer;
+using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +17,17 @@ namespace API.Controllers
         {
             List<TerritoryDTO> territories = new List<TerritoryDTO>();
 
-            foreach (Territory t in DalManagerTerritory.getInstance().getEntities())
+            foreach (Territory t in BusinessManager.getInstance().territories)
                 territories.Add(new TerritoryDTO(t));
 
             return territories;
         }
 
+        /*
         public TerritoryDTO getEntity(int id)
         {
             return new TerritoryDTO((Territory)DalManagerTerritory.getInstance().getEntity(id));
-        }
+        }*/
         
-        public void insert(TerritoryDTO t)
-        {
-            DalManagerTerritory.getInstance().insert(new Territory(t.id, t.territoryType, t.owner));
-        }
     }
 }
