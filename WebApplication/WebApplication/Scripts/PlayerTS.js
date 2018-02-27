@@ -365,6 +365,7 @@ $(function () {
                 //flush CombatTS.listCombat
                 //execution du code ci dessous
                 var jsonString = JSON.stringify(CombatTS.listCombat);
+                console.log(jsonString);
                 $.ajax({
                     type: "GET",
                     url: "/Combat",
