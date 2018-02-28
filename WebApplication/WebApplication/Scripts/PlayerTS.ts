@@ -1,7 +1,7 @@
 ﻿//$(document).ready(function () {
 //    $.ajax({
 //        type: "GET",
-//        url: "/Player",
+//        url: "/House/GetAllHouse",
 //        data: {},
 //        contentType: "application/json; charset=utf-8",
 //        dataType: "json",
@@ -56,6 +56,7 @@ $(function () {
     });
 
     $("#commencer").click(function () {
+        supprHandler1();
         $('#main').empty();
         $('#main').load("/Home/Page2", function (response, status, xhr) {
             if (status == "error") {
@@ -63,7 +64,6 @@ $(function () {
                 $("#error").html(msg + xhr.status + " " + xhr.statusText);
             }
             else {
-                supprHandler1();
                 choixAdversaire();
                 defineHandlerPage2();
                 $('#listJoueur li').css({ "border-bottom": "1px solid red" });
@@ -75,7 +75,6 @@ $(function () {
 
     function supprHandler1() {
         $("#creer").unbind();
-        $("#commencer").unbind();
         $("#commencer").unbind();
     }
 
@@ -139,6 +138,7 @@ $(function () {
                 choixAdversaire();
             }
             else {
+                supprHandler2();
                 $('#main').empty();
                 $('#main').load("/Home/Page3", function (response, status, xhr) {
                     if (status == "error") {
@@ -146,7 +146,6 @@ $(function () {
                         $("#error").html(msg + xhr.status + " " + xhr.statusText);
                     }
                     else {
-                        supprHandler2();
                         index = 0;
                         choixUnite();
                         defineHandlerPage3();
@@ -170,6 +169,17 @@ $(function () {
         $('#defense').val(listJoueur[index].Maison.nbUnite / 2);
         $('#attaque').attr("max", listJoueur[index].Maison.nbUnite);
         $('#defense').attr("max", listJoueur[index].Maison.nbUnite);
+
+        $('#main').on("change", ":input", function () {
+            var cb = $(this);
+            var id = cb.attr("id");
+            if (id == "attaque") {
+                $('#defense').val(listJoueur[index].Maison.nbUnite - $('#attaque').val());
+            }
+            if (id == "defense") {
+                $('#attaque').val(listJoueur[index].Maison.nbUnite - $('#defense').val());
+            }
+        });
     }
 
     function defineHandlerPage3() {
@@ -182,6 +192,7 @@ $(function () {
                 choixUnite();
             }
             else {
+                supprHandler3();
                 $('#main').empty();
                 $('#main').load("/Home/Page4", function (response, status, xhr) {
                     if (status == "error") {
@@ -190,7 +201,6 @@ $(function () {
                     }
                     else {
                         index = 0;
-                        supprHandler3();
                         paramAttaque();
                         defineHandlerPage4();
                         $('#listJoueur li').css({ "border-bottom": "1px solid red" });
@@ -203,6 +213,7 @@ $(function () {
     }
 
     function supprHandler3() {
+        $('#main').unbind();
         $("#etape3").unbind();
     }
 
@@ -229,6 +240,19 @@ $(function () {
         }
         $('#tableCombat').append(html);
 
+        $('input[id^=uniteCombat-]').on('change', function (event) {
+            var spinnerLenght = $('input[id^=uniteCombat-]').length;
+            var total = 0;
+            for (var compteur = 0; compteur < spinnerLenght; compteur++) {
+                total += parseInt($('input[id^=uniteCombat-]').eq(compteur).val());
+            }
+            if (total <= listJoueur[index].Maison.nbAttaquant) {
+                $('#etape4').prop("disabled", false);
+            }
+            else {
+                $('#etape4').prop("disabled", true);
+            }
+        });
 
         $('select').on('change', function (event) {
             var prevValue = $(this).data('previous');
@@ -261,6 +285,7 @@ $(function () {
                 paramAttaque();
             }
             else {
+                supprHandler4();
                 $('#main').empty();
                 $('#main').load("/Home/Page5", function (response, status, xhr) {
                     if (status == "error") {
@@ -269,7 +294,6 @@ $(function () {
                     }
                     else {
                         index = 0;
-                        supprHandler4();
                         paramDefense();
                         defineHandlerPage5();
                         $('#listJoueur li').css({ "border-bottom": "1px solid red" });
@@ -294,13 +318,16 @@ $(function () {
         for (let combat of CombatTS.listCombat) {
             if (combat.IdHouseDefense == listJoueur[index].Maison.IdHouse) {
                 let adversaire: Array<HouseTS> = HouseTS.listMaison.filter(maison => maison.IdHouse === combat.IdHouseAttack);
-                html += "<td><label>Combat contre " + adversaire[0].Name + "</label><select id=\"heroCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack+ "\"><option>-</option>";
-                for (let character of listJoueur[index].Maison.listHero) {
-                    if (character.Type == Fonction.Defenseur) {
-                        html += "<option value=\"" + character.IdCharacter + "\">" + character.Firstname + " " + character.Name + "</option>";
-                    }
-                }
-                html += "</select><input id=\"uniteCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack + "\" type=\"number\" min=\"0\" max=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) + "\" step=\"1\" value=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) / CombatTS.listCombat.filter(fight => fight.IdHouseDefense === combat.IdHouseDefense).length + "\"/></td>";
+                //html += "<td><label>Combat contre " + adversaire[0].Name + "</label><select id=\"heroCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack + "\"><option>-</option>";
+                html += "<td><label>Combat contre " + adversaire[0].Name;
+                //for (let character of listJoueur[index].Maison.listHero) {
+                //    if (character.Type == Fonction.Defenseur) {
+                //        html += "<option value=\"" + character.IdCharacter + "\">" + character.Firstname + " " + character.Name + "</option>";
+                //    }
+                //}
+                //html += "</select><input id=\"uniteCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack + "\" type=\"number\" min=\"0\" max=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) + "\" step=\"1\" value=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) / CombatTS.listCombat.filter(fight => fight.IdHouseDefense === combat.IdHouseDefense).length + "\"/></td>";
+                html += "<input id=\"uniteCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack + "\" type=\"number\" min=\"0\" max=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) + "\" step=\"1\" value=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) / CombatTS.listCombat.filter(fight => fight.IdHouseDefense === combat.IdHouseDefense).length + "\"/></td>";
+
                 i++;
             }
             if (i % 2 == 0) {
@@ -309,6 +336,19 @@ $(function () {
         }
         $('#tableCombat').append(html);
 
+        $('input[id^=uniteCombat-]').on('change', function (event) {
+            var spinnerLenght = $('input[id^=uniteCombat-]').length;
+            var total = 0;
+            for (var compteur = 0; compteur < spinnerLenght; compteur++) {
+                total += parseInt($('input[id^=uniteCombat-]').eq(compteur).val());
+            }
+            if (total <= listJoueur[index].Maison.nbAttaquant) {
+                $('#etape4').prop("disabled", false);
+            }
+            else {
+                $('#etape4').prop("disabled", true);
+            }
+        });
 
         $('select').on('change', function (event) {
             var prevValue = $(this).data('previous');
@@ -321,18 +361,24 @@ $(function () {
     function defineHandlerPage5() {
 
         $("#etape5").click(function () {
-            var heros = $('select[id^="heroCombat-"]');
+            //var heros = $('select[id^="heroCombat-"]');
             var defenseur = $('input[id^="uniteCombat-"]');
             let i: number;
-            for (i = 0; i < heros.length; i++) {
-                var idHero = heros.eq(i).attr("id");
+            for (i = 0; i < defenseur.length; i++) {
+                //var idHero = heros.eq(i).attr("id");
                 var idDefenseur = defenseur.eq(i).attr("id");
 
-                var resHero = idHero.split("-");
+                //var resHero = idHero.split("-");
                 var resDefenseur = idDefenseur.split("-");
 
-                CombatTS.listCombat.filter(fight => fight.IdHouseDefense === parseInt(resHero[1]) && fight.IdHouseAttack === parseInt(resHero[2]))[0].NbUniteDefense = defenseur.eq(i).val();
-                CombatTS.listCombat.filter(fight => fight.IdHouseDefense === parseInt(resHero[1]) && fight.IdHouseAttack === parseInt(resHero[2]))[0].IdHeroDefense = heros.eq(i).val();
+                CombatTS.listCombat.filter(fight => fight.IdHouseDefense === parseInt(resDefenseur[1]) && fight.IdHouseAttack === parseInt(resDefenseur[2]))[0].NbUniteDefense = defenseur.eq(i).val();
+
+                for (let heroDefenseur of listJoueur[index].Maison.listHero.filter(heroDefense => heroDefense.Type == Fonction.Defenseur)) {
+                    CombatTS.listCombat.filter(fight => fight.IdHouseDefense === parseInt(resDefenseur[1]) && fight.IdHouseAttack === parseInt(resDefenseur[2]))[0].listIdHeroDefense.push(heroDefenseur.IdCharacter);
+                }
+                for (let heroSoins of listJoueur[index].Maison.listHero.filter(heroSoin => heroSoin.Type == Fonction.Soin)) {
+                    CombatTS.listCombat.filter(fight => fight.IdHouseDefense === parseInt(resDefenseur[1]) && fight.IdHouseAttack === parseInt(resDefenseur[2]))[0].listIdHeroDefense.push(heroSoins.IdCharacter);
+                }
             }
             index++;
             if (index < listJoueur.length) {
@@ -346,6 +392,30 @@ $(function () {
                 //MAJ Player si house morte
                 //flush CombatTS.listCombat
                 //execution du code ci dessous
+                var jsonString = JSON.stringify(CombatTS.listCombat);
+                $.ajax({
+                    type: "GET",
+                    url: "localhost:5888/Combat",
+                    data: { jsonString },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    //GET RESULT
+                    success: function (success) {
+                        //let list: CombatTS[] = success as CombatTS[];
+                        //$.each(success, function (index, element) {
+                        //    let character: CombatTS = new CombatTS(element.IdHouseAttack, element.IdHouseDefense, element.NbUniteAttack, element.NbUniteDefense);
+                        //    list.push(character);
+                        //});
+                        //list.forEach(function (element: CombatTS) {
+                        //    $('#div_list_character_ts').append(element.afficherCombat);
+                        //});
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                });
+
+                supprHandler5();
                 $('#main').empty();
                 $('#main').load("/Home/Page2", function (response, status, xhr) {
                     if (status == "error") {
@@ -353,7 +423,7 @@ $(function () {
                         $("#error").html(msg + xhr.status + " " + xhr.statusText);
                     }
                     else {
-                        supprHandler5();
+                        index = 0;
                         choixAdversaire();
                         defineHandlerPage2();
                         $('#listJoueur li').css({ "border-bottom": "1px solid red" });
@@ -367,7 +437,7 @@ $(function () {
 
     function supprHandler5() {
         $('select').unbind();
-        $("#etape4").unbind();
+        $("#etape5").unbind();
     }
 });
 

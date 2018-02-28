@@ -46,7 +46,8 @@ namespace DataAccessLayer
 
             foreach (string charId in ((iDal)DalSqlServer.getInstance()).ExecSelectRequest("SELECT Id FROM Charac;"))
             {
-                int.TryParse(charId, out charIntId);
+                String temp = charId.Substring(0, charId.Length - 1);
+                int.TryParse(temp, out charIntId);
                 characters.Add(charIntId);
             }
 
