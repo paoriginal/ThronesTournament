@@ -29,20 +29,20 @@ enum Fonction {
 
 class CharacterTS {
     public IdCharacter: number;
-    public Name: string;
-    public Firstname: string;
+    public Nom: string;
+    public Prenom: string;
     public Type: Fonction;
 
-    constructor(IdCharacter: number, Name: string, Firstname: string, Type: Fonction) {
+    constructor(IdCharacter: number, Nom: string, Prenom: string, Type: Fonction) {
         this.IdCharacter = IdCharacter;
-        this.Name = Name;
-        this.Firstname = Firstname;
+        this.Nom = Nom;
+        this.Prenom = Prenom;
         this.Type = Type;
     }
 
     public afficherCharacter(): JQuery {
         let myThis: CharacterTS = this;
-        let div: JQuery = $('<div>' + this.Name + '</div>'); 
+        let div: JQuery = $('<div>' + this.Nom + '</div>'); 
         div[0].onclick = function (e) {
             myThis.openInfoCharacter();
         }
@@ -50,7 +50,7 @@ class CharacterTS {
     }
 
     public openInfoCharacter(): void {
-        alert('ouvrir info du personnage ' + this.Name);
+        alert('ouvrir info du personnage ' + this.Nom);
     }
 
 

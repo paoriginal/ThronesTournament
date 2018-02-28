@@ -96,7 +96,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetHouses()
+        public async Task<JsonResult> GetHouses()
         {
 
             using (var client = new HttpClient())
@@ -116,7 +116,7 @@ namespace WebApplication.Controllers
                 HttpResponseMessage response2 = await client.GetAsync("api/Character/getEntities");
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsondata2 = await response.Content.ReadAsStringAsync();
+                    string jsondata2 = await response2.Content.ReadAsStringAsync();
                     Characters = JsonConvert.DeserializeObject<IEnumerable<CharacterModels>>(jsondata2).ToList();
                 }
                 
@@ -130,8 +130,10 @@ namespace WebApplication.Controllers
                 };
 
                 string jsonSerialize = JsonConvert.SerializeObject(Houses, Formatting.Indented);
-                
-                return View(jsonSerialize);
+
+                return Json(jsonSerialize, JsonRequestBehavior.AllowGet);
+
+                //return jsonSerialize;
             }
         }
     }

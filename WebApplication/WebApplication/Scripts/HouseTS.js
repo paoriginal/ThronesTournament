@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $.ajax({
         type: "GET",
         url: "/House/GetHouses",
@@ -7,15 +7,18 @@ $(document).ready(function () {
         dataType: "json",
         success: function (success) {
             var list = success;
-            $.each(success, function (index, element) {
+            $.each(JSON.parse(success), function (index, element) {
                 var listCharacter = element.ListCharacters;
-                $.each(element.ListCharacters, function (index2, element2) {
-                    var character = new CharacterTS(element2.IdCharacter, element2.Nom, element2.Prenom, null);
-                    listCharacter.push(character);
-                });
+                //$.each(element.ListCharacters, function (index2, element2) {
+                //    let character: CharacterTS = new CharacterTS(element2.IdCharacter, element2.Nom, element2.Prenom, null);
+                //    listCharacter.push(character);
+                //});
                 var house = new HouseTS(element.IdHouse, element.NomHouse, element.NbUnities, listCharacter);
                 HouseTS.listMaison.push(house);
             });
+        },
+        complete: function (data) {
+            startGame();
         },
         error: function (error) {
             alert(error);

@@ -27,22 +27,22 @@ var Fonction;
     Fonction[Fonction["Defenseur"] = 3] = "Defenseur";
 })(Fonction || (Fonction = {}));
 var CharacterTS = /** @class */ (function () {
-    function CharacterTS(IdCharacter, Name, Firstname, Type) {
+    function CharacterTS(IdCharacter, Nom, Prenom, Type) {
         this.IdCharacter = IdCharacter;
-        this.Name = Name;
-        this.Firstname = Firstname;
+        this.Nom = Nom;
+        this.Prenom = Prenom;
         this.Type = Type;
     }
     CharacterTS.prototype.afficherCharacter = function () {
         var myThis = this;
-        var div = $('<div>' + this.Name + '</div>');
+        var div = $('<div>' + this.Nom + '</div>');
         div[0].onclick = function (e) {
             myThis.openInfoCharacter();
         };
         return div;
     };
     CharacterTS.prototype.openInfoCharacter = function () {
-        alert('ouvrir info du personnage ' + this.Name);
+        alert('ouvrir info du personnage ' + this.Nom);
     };
     return CharacterTS;
 }());

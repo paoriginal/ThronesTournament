@@ -22,11 +22,13 @@
 //});
 
 
-$(function () {
+function startGame () {
     let listJoueur: Array<PlayerTS> = new Array<PlayerTS>();
 
     let index: number = 0;
+    
 
+    alert(HouseTS.listMaison.length);
 
     for (let house of HouseTS.listMaison) {
         $('#house').append("<option value=\"" + house.IdHouse + "\" > " + house.Name + " </option>");
@@ -91,7 +93,7 @@ $(function () {
         $('#hero table').append("<tr><th>Héro</th><th>Soins</th><th>Attaquant</th><th>Defenseur</th></tr>");
         let indexTab: number = 0;
         for (let character of listJoueur[index].Maison.listHero) {
-            $('#hero table').append("<tr><td>" + character.Firstname + " " + character.Name + "</td><td><input class=\"character combat\" id=\"checkBox" + indexTab + "-1\" value=\"" + indexTab + "-1\" type= \"checkbox\" > </td><td> <input class=\"character combat\" id=\"checkBox" + indexTab + "-2\" value=\"" + indexTab + "-2\" type= \"checkbox\" > </td><td> <input class=\"character combat\" id=\"checkBox" + indexTab + "-3\" value=\"" + indexTab + "-3\" type= \"checkbox\" > </td></tr>");
+            $('#hero table').append("<tr><td>" + character.Prenom + " " + character.Nom + "</td><td><input class=\"character combat\" id=\"checkBox" + indexTab + "-1\" value=\"" + indexTab + "-1\" type= \"checkbox\" > </td><td> <input class=\"character combat\" id=\"checkBox" + indexTab + "-2\" value=\"" + indexTab + "-2\" type= \"checkbox\" > </td><td> <input class=\"character combat\" id=\"checkBox" + indexTab + "-3\" value=\"" + indexTab + "-3\" type= \"checkbox\" > </td></tr>");
             indexTab++;
         }
         var checkBoxes = $('input.combat');
@@ -228,7 +230,7 @@ $(function () {
                 html += "<td><label>Combat contre " + adversaire[0].Name + "</label><select id=\"heroCombat-" + combat.IdHouseAttack + "-" + combat.IdHouseDefense + "\"><option>-</option>";
                 for (let character of listJoueur[index].Maison.listHero) {
                     if (character.Type == Fonction.Attaquant) {
-                        html += "<option value=\"" + character.IdCharacter + "\">" + character.Firstname + " " + character.Name + "</option>";
+                        html += "<option value=\"" + character.IdCharacter + "\">" + character.Prenom + " " + character.Nom + "</option>";
                     }
                 }
                 html += "</select><input id=\"uniteCombat-" + combat.IdHouseAttack + "-" + combat.IdHouseDefense + "\" type=\"number\" min=\"0\" max=\"" + listJoueur[index].Maison.nbAttaquant + "\" step=\"1\" value=\"" + listJoueur[index].Maison.nbAttaquant / CombatTS.listCombat.filter(fight => fight.IdHouseAttack === combat.IdHouseAttack).length + "\"/></td>";
@@ -322,7 +324,7 @@ $(function () {
                 html += "<td><label>Combat contre " + adversaire[0].Name;
                 //for (let character of listJoueur[index].Maison.listHero) {
                 //    if (character.Type == Fonction.Defenseur) {
-                //        html += "<option value=\"" + character.IdCharacter + "\">" + character.Firstname + " " + character.Name + "</option>";
+                //        html += "<option value=\"" + character.IdCharacter + "\">" + character.Prenom + " " + character.Name + "</option>";
                 //    }
                 //}
                 //html += "</select><input id=\"uniteCombat-" + combat.IdHouseDefense + "-" + combat.IdHouseAttack + "\" type=\"number\" min=\"0\" max=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) + "\" step=\"1\" value=\"" + (listJoueur[index].Maison.nbUnite - listJoueur[index].Maison.nbAttaquant) / CombatTS.listCombat.filter(fight => fight.IdHouseDefense === combat.IdHouseDefense).length + "\"/></td>";
@@ -439,7 +441,7 @@ $(function () {
         $('select').unbind();
         $("#etape5").unbind();
     }
-});
+}
 
 class PlayerTS {
     private static count: number = 0;

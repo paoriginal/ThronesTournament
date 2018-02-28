@@ -41,7 +41,7 @@ namespace WebApplication.Models
             set { listCharacters = value; }
         }
 
-        private List<int> listCharacterId;
+        private List<int> listCharacterId = new List<int>();
 
         public List<int> ListCharacterId
         {
@@ -49,11 +49,12 @@ namespace WebApplication.Models
             set { listCharacterId = value; }
         }
 
-        public HouseModels(int id, string name, List<int> charId)
+        public HouseModels(int id, string name, List<int> housers, int nbUnits)
         {
-            this.idHouse = id;
-            this.nomHouse = name;
-            this.ListCharacterId = charId;
+            this.IdHouse = id;
+            this.NomHouse = name;
+            this.ListCharacterId = housers;
+            this.NbUnities = nbUnits;
         }
 
         public void AddCharacter(CharacterModels character)
