@@ -41,7 +41,8 @@ namespace DataAccessLayer
 
             foreach (string charId in ids)
             {
-                int.TryParse(charId, out charIntId);
+                String temp = charId.Substring(0, charId.Length - 1);
+                int.TryParse(temp, out charIntId);
                 houses.Add(charIntId);
             }
 

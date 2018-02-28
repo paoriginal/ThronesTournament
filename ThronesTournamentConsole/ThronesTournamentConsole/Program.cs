@@ -11,13 +11,48 @@ namespace ThronesTournamentConsole
         static void Main(string[] args)
         {
 
-            string example1 = @"{""name"":""John Doe"",""age"":20}";
 
-            string exemple2 = @"{""fruits"": [{ ""kiwis"": 3,""mangues"": 4,""pommes"": null},{ ""panier"": true }],""legumes"": {""patates"": ""amandine"",""poireaux"": false},""viandes"": [""poisson"",""poulet"",""boeuf""]}";
+            Console.WriteLine("ThronesTournamentConsole");
+            /*
+            for (int i = 1; i<13; i++)
+                DalManagerCharacter.getInstance().remove(i);
+            for (int i = 1; i < 17; i++)
+                DalManagerHouse.getInstance().remove(i);
 
-            initiateDataBase();
 
-            Console.WriteLine("ThronesTournamentConsole");  
+            initiateDataBase();*/
+
+            //BusinessManager bm = BusinessManager.getInstance();
+            Console.WriteLine("Charac id");
+
+            List<int> idList2 = DalManagerCharacter.getInstance().getIds();
+
+            foreach (int id in idList2)
+                Console.WriteLine(id);
+
+            Console.WriteLine("House Id");
+
+            List<int> idList3 = DalManagerHouse.getInstance().getIds();
+
+            foreach (int id in idList3)
+                Console.WriteLine(id);
+
+            Console.WriteLine("Charac");
+
+            List<EntityObject> charac = DalManagerCharacter.getInstance().getEntities();
+
+            foreach (Character c in charac)
+                Console.WriteLine(c.id + " " + c.firstName + " " + c.lastName + " " + c.statistics.hp + " " + c.statistics.bravoury + " " + c.statistics.crazyness);
+
+            Console.WriteLine("Charac");
+
+            List<EntityObject> house = DalManagerHouse.getInstance().getEntities();
+
+            foreach (House h in house)
+                Console.WriteLine(h.id + " " + h.name + " " + h.nbUnits);
+
+            Console.WriteLine("ThronesTournamentConsole");
+
             Console.ReadLine();
 
             /*
@@ -79,6 +114,9 @@ namespace ThronesTournamentConsole
             DalManagerHouse.getInstance().empty();
             DalManagerTerritory.getInstance().empty();
             DalManagerWar.getInstance().empty();
+
+
+            Console.WriteLine("Table Vide");
 
             //Stark
             dalCharac.insert(new Character(1, new Statistics(50, 30, 5), "Jon", "Snow"));
