@@ -11,7 +11,7 @@ namespace DataAccessLayer
         private static DalSqlServer INSTANCE = null;
         private string _connectionString;
 
-        private DalSqlServer() { _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Desktop\\ThronesTournament-master\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30"; }
+        private DalSqlServer() { _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Admin\\source\\repos\\ThronesTournament\\ThronesTournament\\ThronesTournament\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30"; }
 
         //string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Aubin\\Documents\\ISIMA\\ZZ2\\SERVICES_WEB\\ThronesTournament\\ThronesTournamentConsole\\ThronesTournament.mdf;Integrated Security=True;Connect Timeout=30";
 
