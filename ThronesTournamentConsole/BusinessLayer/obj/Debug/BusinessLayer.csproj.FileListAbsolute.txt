@@ -1,0 +1,13 @@
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\BusinessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\BusinessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\DataAccessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\EntitiesLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\StubDataAccessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\DataAccessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\EntitiesLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\bin\Debug\StubDataAccessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\obj\Debug\BusinessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\obj\Debug\BusinessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete

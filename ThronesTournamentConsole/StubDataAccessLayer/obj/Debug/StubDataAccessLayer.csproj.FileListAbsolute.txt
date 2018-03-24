@@ -1,0 +1,9 @@
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\bin\Debug\StubDataAccessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\bin\Debug\StubDataAccessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\bin\Debug\EntitiesLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\bin\Debug\EntitiesLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.dll
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.pdb
+D:\Desktop\tmp\ThronesTournament\ThronesTournamentConsole\StubDataAccessLayer\obj\Debug\StubDataAccessLayer.csproj.CopyComplete
