@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WpfApp1.infos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:ConvertirVisibilitéTextBox x:Key="ConverterTextBox"/>
+        <local:ConvertirVisibilitéTextBlock x:Key="ConverterTextBlock"/>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="textBlockAttribut" Grid.Column="0" FontSize="15" FontWeight="SemiBold">Nom</TextBlock>
+        <TextBlock Visibility="{Binding DependencyPropertyModification, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource  ConverterTextBlock}, Mode=TwoWay}" Name="textBlockInfo" Grid.Column="1" FontSize="15" FontWeight="SemiBold" Margin="5 0" TextWrapping="Wrap" Text="{Binding Text, ElementName=textBoxInfo}"/>
+        <TextBox Visibility="{Binding DependencyPropertyModification, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource  ConverterTextBox}, Mode=TwoWay}" x:Name="textBoxInfo" Grid.Column="1" FontSize="15" FontWeight="SemiBold" Margin="5 0" TextWrapping="Wrap" Text="{Binding texte, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+    </Grid>
+</UserControl>
